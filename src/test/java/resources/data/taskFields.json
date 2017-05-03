@@ -1,0 +1,16 @@
+{
+  "MyTask": {
+    "category":        "General",
+    "reproducibility": "всегда",
+    "influence":       "блокирующее",
+    "priority":        "срочный",
+    "platform":        "${domain}",
+    "OS":              "${os}",
+    "OSVersion":       "${version}",
+    "order":           "dev1",
+    "summary":         "theme",
+    "description":     "description",
+    "reproduceSteps":  "reproduce steps",
+    "additionalInfo":  "additional information"
+  }
+}
