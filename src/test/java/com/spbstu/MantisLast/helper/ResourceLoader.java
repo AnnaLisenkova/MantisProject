@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by anna on 02.05.17.
@@ -20,13 +21,23 @@ public class ResourceLoader {
     private static Map<String, User> users;
     private static Map<String, Task> tasks;
 
+    private static Random random = new Random();
+
     static {
         try {
             loadUsers();
             loadIssues();
+            addUniqueNumber();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void addUniqueNumber() {
+        tasks.get("MyTask").setSummary(tasks.get("MyTask").getSummary()+' '+random.nextInt(100));
+        tasks.get("MyTask").setDescription(tasks.get("MyTask").getDescription()+' '+random.nextInt(100));
+        tasks.get("MyTask").setReproduceSteps(tasks.get("MyTask").getReproduceSteps()+' '+random.nextInt(100));
+        tasks.get("MyTask").setAdditionalInfo(tasks.get("MyTask").getAdditionalInfo()+' '+random.nextInt(100));
     }
 
     private static void loadUsers() throws IOException {
