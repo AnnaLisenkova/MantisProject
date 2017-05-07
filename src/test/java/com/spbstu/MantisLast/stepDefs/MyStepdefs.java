@@ -2,10 +2,12 @@ package com.spbstu.MantisLast.stepDefs;
 
 import com.spbstu.MantisLast.Mantis;
 import com.spbstu.MantisLast.helper.ResourceLoader;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.it.Ma;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -62,7 +64,7 @@ public class MyStepdefs {
     public void clickOnButton(String button_name) throws Throwable {
         Mantis.taskReviewPage.clickOnChangeToButton(button_name);
     }
-    @And("^Click on \"([^\"]*)\" button at Task Solution Form$")
+    @Then("^Click on \"([^\"]*)\" button at Task Solution Form$")
     public void clickOnButtonAtTaskSolutionForm(String button_name) throws Throwable {
         Mantis.taskReviewPage.clickOnSolveButton(button_name);
     }
@@ -86,8 +88,14 @@ public class MyStepdefs {
     public void taskFieldsContainInfoFromWithSomeAdditional(String taskID, Map<String,String> addInfo) throws Throwable {
         Assert.assertTrue(Mantis.taskReviewPage
                                 .checkTaskFields(ResourceLoader.getTask(taskID),
-                                                 addInfo.get("reporter"),
+                                                 addInfo.get("originator"),
                                                  addInfo.get("status"),
                                                  addInfo.get("resolution")));
+    }
+
+    @When("^Change responsibility to \"([^\"]*)\"$")
+    public void changeResponsibilityTo(String userID) throws Throwable {
+        Mantis.taskReviewPage.clickOnListOfResposibleUsers();
+        Mantis.taskReviewPage.changeResponsibleUser(userID);
     }
 }

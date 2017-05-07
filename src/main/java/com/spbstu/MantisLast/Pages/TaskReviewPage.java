@@ -55,6 +55,9 @@ public class TaskReviewPage {
     @FindBy(xpath = "//td[@class='bug-resolution']")
     WebElement bugResolution;
 
+    @FindBy(xpath = "//select[@name='handler_id']")
+    WebElement responsible;
+
     public void clickOnChangeToField(){
         this.changeToField.click();
     }
@@ -71,6 +74,14 @@ public class TaskReviewPage {
         Mantis.getDriver().findElement(By.xpath(" //input[@value='"+buttonName+"']")).click();
     }
 
+    public void clickOnListOfResposibleUsers(){
+        this.responsible.click();
+    }
+
+    public void changeResponsibleUser(String userID){
+        Mantis.getDriver().findElement(By.xpath("//select[@name='handler_id']/option[.='"+userID+"']")).click();
+    }
+
     public void findAndClickCreatedTask(String expected) throws Exception {
         Mantis.checkTask.getList().stream()
                 .filter(row -> row.findElement(By.xpath("//td[@class='column-summary']")).getText().equals(expected))
@@ -80,20 +91,20 @@ public class TaskReviewPage {
                 .click();
     }
 
-    public boolean checkTaskFields(Task task, String reporter, String bugStatus, String resolution) {
-        return (this.reporter.getText().contains(reporter)|
-                this.bugAssignedTo.getText().contains(task.getOrder())|
-                this.bugReproducibility.getText().contains(task.getReproducibility())|
-                this.bugSeverity.getText().contains(task.getInfluence())|
-                this.priority.getText().contains(task.getPriority())|
-                this.bugPlatform.getText().contains(task.getPlatform())|
-                this.bugOs.getText().contains(task.getOS())|
-                this.bugOsVersion.getText().contains(task.getOSVersion())|
-                this.bugStatus.getText().contains(bugStatus)|
-                this.bugSummary.getText().contains(task.getSummary())|
-                this.bugDescription.getText().contains(task.getDescription())|
-                this.bugStepsToReproduce.getText().contains(task.getReproduceSteps())|
-                this.bugAdditionalInformation.getText().contains(task.getAdditionalInfo())|
-                this.bugResolution.getText().contains(resolution));
+    public boolean checkTaskFields(Task task, String originator, String bugStatus, String resolution) {
+        return (this.reporter.getText().equals(originator)&&
+                this.bugAssignedTo.getText().equals(task.getOrder())&&
+                this.bugReproducibility.getText().equals(task.getReproducibility())&&
+                this.bugSeverity.getText().equals(task.getInfluence())&&
+                this.priority.getText().equals(task.getPriority())&&
+                this.bugPlatform.getText().equals(task.getPlatform())&&
+                this.bugOs.getText().equals(task.getOS())&&
+                this.bugOsVersion.getText().equals(task.getOSVersion())&&
+                this.bugStatus.getText().contains(bugStatus)&&
+                this.bugSummary.getText().contains(task.getSummary())&&
+                this.bugDescription.getText().equals(task.getDescription())&&
+                this.bugStepsToReproduce.getText().equals(task.getReproduceSteps())&&
+                this.bugAdditionalInformation.getText().equals(task.getAdditionalInfo())&&
+                this.bugResolution.getText().equals(resolution));
     }
 }

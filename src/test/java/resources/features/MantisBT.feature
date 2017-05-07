@@ -12,9 +12,9 @@ Feature: Task cycle
     Then Task List contains "MyTask" with condition "назначена" by "dev1"
     Given Open "MyTask" review
       And Task fields contain info from "MyTask" with some additional
-          |  reporter  |   dev1    |
+          | originator |  tester1  |
           |   status   | назначена |
-          | resolution |  решена   |
+          | resolution |  открыта  |
     Then Change task status to "решена"
       And Click on "Перевести в:" button
       And Click on "Решить" button at Task Solution Form
@@ -25,7 +25,8 @@ Feature: Task cycle
     Given Open "MyTask" review
     Then Change task status to "закрыта"
       And Click on "Перевести в:" button
-      And Click on "Закрыть задачу" button at Task Solution Form
+    When Change responsibility to "lead1"
+    Then Click on "Закрыть задачу" button at Task Solution Form
     Given Open Review Page
       And Click on "Недавно изменённые (30 дней)"
      Then Task List contains "MyTask" with condition "закрыта" by "lead1"
