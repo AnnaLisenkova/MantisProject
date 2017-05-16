@@ -57,7 +57,6 @@ public class CreateTaskPage {
     public void fillTaskForm(Task issue){
         this.category.click();
         Mantis.getDriver().findElement(By.xpath("//option[.='[все проекты] General']")).click();
-        //Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getCategory()+"']")).click();
 
         this.reproducibility.click();
         Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getReproducibility()+"']")).click();

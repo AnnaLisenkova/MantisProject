@@ -75,8 +75,8 @@ public class MyStepdefs {
     }
 
     @And("^Click on \"([^\"]*)\"$")
-    public void clickOn(String arg0) throws Throwable {
-        Mantis.reviewPage.clickOnRecentlyChagedTasksField();
+    public void clickOn(String name) throws Throwable {
+        Mantis.reviewPage.clickOnRecentlyChangedTasksField();
     }
 
     @Then("^Task List contains \"([^\"]*)\" with condition \"([^\"]*)\" by \"([^\"]*)\"$")

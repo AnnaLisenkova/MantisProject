@@ -28,6 +28,6 @@ Feature: Task cycle
     When Change responsibility to "lead1"
     Then Click on "Закрыть задачу" button at Task Solution Form
     Given Open Review Page
-      And Click on "Недавно изменённые (30 дней)"
+      And Click on "Недавно измененные (30 Дней)"
      Then Task List contains "MyTask" with condition "закрыта" by "lead1"
 

@@ -36,7 +36,7 @@ public class Hook {
         Mantis.loginPage.fillContactForm(ResourceLoader.getUser("lead1"));
 
         Mantis.commonForms.pushReviewOnSidebar();
-        Mantis.reviewPage.clickOnRecentlyChagedTasksField();
+        Mantis.reviewPage.clickOnRecentlyChangedTasksField();
         Mantis.checkTask.getList().stream()
                 .filter(row -> row.findElement(By.xpath("//td[@class='column-summary']")).getText().equals(ResourceLoader.getTask("MyTask").getSummary()))
                 .findFirst()
