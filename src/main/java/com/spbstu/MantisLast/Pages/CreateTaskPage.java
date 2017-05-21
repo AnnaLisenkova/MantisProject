@@ -72,7 +72,7 @@ public class CreateTaskPage {
         this.osVersion.sendKeys(issue.getOSVersion());
 
         this.appointUser.click();
-        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getOrder()+"']")).click();
+        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getResponsible()+"']")).click();
 
         this.summary.sendKeys(issue.getSummary());
         this.description.sendKeys(issue.getDescription());

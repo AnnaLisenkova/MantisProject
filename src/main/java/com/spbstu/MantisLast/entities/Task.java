@@ -20,7 +20,10 @@ public class Task {
     String platform;
     String OS;
     String OSVersion;
-    String order;
+    String status;
+    String originator;
+    String responsible;
+    String resolution;
     String summary;
     String description;
     String reproduceSteps;

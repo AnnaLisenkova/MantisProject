@@ -7,10 +7,14 @@
     "platform":        "domain",
     "OS":              "os",
     "OSVersion":       "version",
-    "order":           "dev1",
+    "status":          "назначена",
+    "responsible":     "dev1",
+    "originator":      "tester1",
+    "resolution":      "открыта",
     "summary":         "theme",
     "description":     "description",
     "reproduceSteps":  "reproduce steps",
-    "additionalInfo":  "additional information"
+    "additionalInfo":  "additional information",
+    "random":          "[]"
   }
 }

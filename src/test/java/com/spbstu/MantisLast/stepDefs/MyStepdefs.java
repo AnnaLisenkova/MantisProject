@@ -54,12 +54,6 @@ public class MyStepdefs {
         Mantis.taskReviewPage.findAndClickCreatedTask(ResourceLoader.getTask(taskID).getSummary());
     }
 
-    @Then("^Change task status to \"([^\"]*)\"$")
-    public void changeTaskStatusTo(String newStatus) throws Throwable {
-        Mantis.taskReviewPage.clickOnChangeToField();
-        Mantis.taskReviewPage.chooseNewStatus(newStatus);
-    }
-
     @And("^Click on \"([^\"]*)\" button$")
     public void clickOnButton(String button_name) throws Throwable {
         Mantis.taskReviewPage.clickOnChangeToButton(button_name);
@@ -79,23 +73,28 @@ public class MyStepdefs {
         Mantis.reviewPage.clickOnRecentlyChangedTasksField();
     }
 
-    @Then("^Task List contains \"([^\"]*)\" with condition \"([^\"]*)\" by \"([^\"]*)\"$")
-    public void taskListContainsWithConditionBy(String taskID, String condition, String personInCondition) throws Throwable {
-        Assert.assertTrue(Mantis.checkTask.checkCreatedTaskInList(ResourceLoader.getTask(taskID), condition, personInCondition));
+    @Then("^Task List contains \"([^\"]*)\"$")
+    public void taskListContains(String taskID) throws Throwable {
+        Assert.assertTrue(Mantis.checkTask.checkCreatedTaskInList(ResourceLoader.getTask(taskID)));
     }
 
-    @And("^Task fields contain info from \"([^\"]*)\" with some additional$")
-    public void taskFieldsContainInfoFromWithSomeAdditional(String taskID, Map<String,String> addInfo) throws Throwable {
-        Assert.assertTrue(Mantis.taskReviewPage
-                                .checkTaskFields(ResourceLoader.getTask(taskID),
-                                                 addInfo.get("originator"),
-                                                 addInfo.get("status"),
-                                                 addInfo.get("resolution")));
-    }
 
     @When("^Change responsibility to \"([^\"]*)\"$")
     public void changeResponsibilityTo(String userID) throws Throwable {
         Mantis.taskReviewPage.clickOnListOfResposibleUsers();
-        Mantis.taskReviewPage.changeResponsibleUser(userID);
+        Mantis.taskReviewPage.changeResponsibleUser(ResourceLoader.getUser(userID).getLogin());
+    }
+
+    @And("^Task fields contain information from \"([^\"]*)\"$")
+    public void taskFieldsContainInformationFrom(String taskID) throws Throwable {
+        Assert.assertTrue(Mantis.taskReviewPage.checkTaskFields(ResourceLoader.getTask(taskID)));
+    }
+
+    @Then("^Change \"([^\"]*)\" status to \"([^\"]*)\" by \"([^\"]*)\"$")
+    public void changeStatusToBy(String taskID, String newStatus, String responsible) throws Throwable {
+        ResourceLoader.getTask(taskID).setStatus(newStatus);
+        ResourceLoader.getTask(taskID).setResponsible(ResourceLoader.getUser(responsible).getLogin());
+        Mantis.taskReviewPage.clickOnChangeToField();
+        Mantis.taskReviewPage.chooseNewStatus(newStatus);
     }
 }

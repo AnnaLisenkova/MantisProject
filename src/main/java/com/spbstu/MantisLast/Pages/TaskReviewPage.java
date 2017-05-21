@@ -91,20 +91,20 @@ public class TaskReviewPage {
                 .click();
     }
 
-    public boolean checkTaskFields(Task task, String originator, String bugStatus, String resolution) {
-        return (this.reporter.getText().equals(originator)&&
-                this.bugAssignedTo.getText().equals(task.getOrder())&&
+    public boolean checkTaskFields(Task task) {
+        return (this.reporter.getText().equals(task.getOriginator())&&
+                this.bugAssignedTo.getText().equals(task.getResponsible())&&
                 this.bugReproducibility.getText().equals(task.getReproducibility())&&
                 this.bugSeverity.getText().equals(task.getInfluence())&&
                 this.priority.getText().equals(task.getPriority())&&
                 this.bugPlatform.getText().equals(task.getPlatform())&&
                 this.bugOs.getText().equals(task.getOS())&&
                 this.bugOsVersion.getText().equals(task.getOSVersion())&&
-                this.bugStatus.getText().contains(bugStatus)&&
+                this.bugStatus.getText().contains(task.getStatus())&&
                 this.bugSummary.getText().contains(task.getSummary())&&
                 this.bugDescription.getText().equals(task.getDescription())&&
                 this.bugStepsToReproduce.getText().equals(task.getReproduceSteps())&&
                 this.bugAdditionalInformation.getText().equals(task.getAdditionalInfo())&&
-                this.bugResolution.getText().equals(resolution));
+                this.bugResolution.getText().equals(task.getResolution()));
     }
 }
