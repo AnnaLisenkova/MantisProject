@@ -19,6 +19,9 @@ public class CreateTaskPage {
     @FindBy(id = "category_id")
     WebElement category;
 
+    @FindBy(xpath = "//option[.='[все проекты] General']")
+    WebElement generalCategory;
+
     @FindBy(css = "[name='reproducibility']")
     WebElement reproducibility;
 
@@ -53,26 +56,29 @@ public class CreateTaskPage {
         this.submitTaskFormButton.click();
     }
 
+    public void clickOnOption(String name){
+        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='" + name + "']")).click();
+    }
 
     public void fillTaskForm(Task issue){
         this.category.click();
-        Mantis.getDriver().findElement(By.xpath("//option[.='[все проекты] General']")).click();
+        this.generalCategory.click();
 
         this.reproducibility.click();
-        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getReproducibility()+"']")).click();
+        clickOnOption(issue.getReproducibility());
 
         this.influence.click();
-        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getInfluence()+"']")).click();
+        clickOnOption(issue.getInfluence());
 
         this.priority.click();
-        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getPriority()+"']")).click();
+        clickOnOption(issue.getPriority());
 
         this.platform.sendKeys(issue.getPlatform());
         this.os.sendKeys(issue.getOS());
         this.osVersion.sendKeys(issue.getOSVersion());
 
         this.appointUser.click();
-        Mantis.getDriver().findElement(By.xpath("//select[@class='input-sm']/option[.='"+issue.getResponsible()+"']")).click();
+        clickOnOption(issue.getResponsible());
 
         this.summary.sendKeys(issue.getSummary());
         this.description.sendKeys(issue.getDescription());

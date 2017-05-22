@@ -2,6 +2,7 @@ package com.spbstu.MantisLast.helper;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.mifmif.common.regex.Generex;
 import com.spbstu.MantisLast.entities.Task;
 import com.spbstu.MantisLast.entities.User;
 import org.apache.commons.io.IOUtils;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by anna on 02.05.17.
@@ -21,23 +21,13 @@ public class ResourceLoader {
     private static Map<String, User> users;
     private static Map<String, Task> tasks;
 
-    private static Random random = new Random();
-
     static {
         try {
             loadUsers();
             loadIssues();
-            addUniqueNumber();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void addUniqueNumber() {
-        tasks.get("MyTask").setSummary(tasks.get("MyTask").getSummary()+' '+random.nextInt(100));
-        tasks.get("MyTask").setDescription(tasks.get("MyTask").getDescription()+' '+random.nextInt(100));
-        tasks.get("MyTask").setReproduceSteps(tasks.get("MyTask").getReproduceSteps()+' '+random.nextInt(100));
-        tasks.get("MyTask").setAdditionalInfo(tasks.get("MyTask").getAdditionalInfo()+' '+random.nextInt(100));
     }
 
     private static void loadUsers() throws IOException {
@@ -59,6 +49,13 @@ public class ResourceLoader {
         String rawData = getRawDataFromIssues(DATA_TASKS_JSON);
         Type type = new TypeToken<Map<String, Task>>(){}.getType();
         tasks = new Gson().fromJson(rawData, type);
+        tasks.forEach((key,value)->{value.setPlatform(new Generex(value.getPlatform()).random());
+                                    value.setOS(new Generex(value.getOS()).random());
+                                    value.setOSVersion(new Generex(value.getOSVersion()).random());
+                                    value.setSummary(value.getSummary()+' '+new Generex(value.getRandom()).random());
+                                    value.setDescription(value.getDescription()+' '+new Generex(value.getRandom()).random());
+                                    value.setReproduceSteps(value.getReproduceSteps()+' '+new Generex(value.getRandom()).random());
+                                    value.setAdditionalInfo(value.getAdditionalInfo()+' '+new Generex(value.getRandom()).random());});
     }
 
     private static String getRawDataFromIssues(String dataTasksJson) throws IOException {

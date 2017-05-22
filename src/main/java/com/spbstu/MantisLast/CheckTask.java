@@ -34,16 +34,16 @@ public class CheckTask {
     }
 
     public boolean checkCreatedTaskInList(Task task) {
-        return (elements.stream().anyMatch(row -> row.findElement(By.xpath("//td[@class='column-category']")).getText().equals(task.getCategory()))
-                &&elements.stream().anyMatch((row -> row.findElement(By.xpath("//td[@class='column-severity']")).getText().equals(task.getInfluence())))
-                &&elements.stream().anyMatch((row -> row.findElement(By.xpath("//td[@class='column-status']")).getText().contains(task.getStatus())))
-                &&elements.stream().anyMatch((row -> row.findElement(By.xpath("//td[@class='column-status']")).getText().contains(task.getResponsible())))
-                &&elements.stream().anyMatch((row -> row.findElement(By.xpath("//td[@class='column-summary']")).getText().equals(task.getSummary()))));
+    return (category.getText().equals(task.getCategory())      &&
+            severity.getText().equals(task.getInfluence())     &&
+            status.getText().contains(task.getStatus())        &&
+            status.getText().contains(task.getResponsible())   &&
+            summary.getText().equals(task.getSummary()));
     }
 
     public boolean checkWhetherTaskContainsInList(String expected) {
         return elements.stream()
-                .anyMatch((row -> row.findElement(By.xpath("//td[@class='column-summary']"))
+                        .anyMatch((row -> row.findElement(By.xpath("//td[@class='column-summary']"))
                         .getText()
                         .equals(expected)));
     }

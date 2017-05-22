@@ -28,4 +28,5 @@ public class Task {
     String description;
     String reproduceSteps;
     String additionalInfo;
+    String random;
 }

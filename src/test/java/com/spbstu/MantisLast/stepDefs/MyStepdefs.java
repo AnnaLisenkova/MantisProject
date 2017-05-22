@@ -81,7 +81,7 @@ public class MyStepdefs {
 
     @When("^Change responsibility to \"([^\"]*)\"$")
     public void changeResponsibilityTo(String userID) throws Throwable {
-        Mantis.taskReviewPage.clickOnListOfResposibleUsers();
+        Mantis.taskReviewPage.clickOnListOfResponsibleUsers();
         Mantis.taskReviewPage.changeResponsibleUser(ResourceLoader.getUser(userID).getLogin());
     }
 

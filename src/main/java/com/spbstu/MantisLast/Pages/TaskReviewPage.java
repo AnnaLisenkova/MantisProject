@@ -55,7 +55,7 @@ public class TaskReviewPage {
     @FindBy(xpath = "//td[@class='bug-resolution']")
     WebElement bugResolution;
 
-    @FindBy(xpath = "//select[@name='handler_id']")
+    @FindBy(name = "handler_id")
     WebElement responsible;
 
     public void clickOnChangeToField(){
@@ -74,7 +74,7 @@ public class TaskReviewPage {
         Mantis.getDriver().findElement(By.xpath(" //input[@value='"+buttonName+"']")).click();
     }
 
-    public void clickOnListOfResposibleUsers(){
+    public void clickOnListOfResponsibleUsers(){
         this.responsible.click();
     }
 

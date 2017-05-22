@@ -27,6 +27,9 @@ public class CommonForms {
     @FindBy(xpath = "//li[@class='grey']/a[1]")
     WebElement chooseProjectSpan;
 
+    @FindBy(xpath = "//ul[@class='list dropdown-yellow no-margin']/li/a[.=' MantisTesting ']")
+    WebElement project;
+
     public void clickOnUser(){
         this.userSpan.click();
     }
@@ -47,7 +50,7 @@ public class CommonForms {
 
     public void setProject(){
         this.chooseProjectSpan.click();
-        Mantis.getDriver().findElement(By.xpath("//ul[@class='list dropdown-yellow no-margin']/li/a[.=' MantisTesting ']")).click();
+        this.project.click();
     }
 
 }
