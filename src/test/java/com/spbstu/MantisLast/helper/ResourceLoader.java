@@ -37,7 +37,7 @@ public class ResourceLoader {
     }
 
     private static String getRawDataFromUsers(String dataUsersJson) throws IOException {
-        URL resource = ResourceLoader.class.getClassLoader().getResource(DATA_USERS_JSON);
+        URL resource = ResourceLoader.class.getClassLoader().getResource(dataUsersJson);
         return IOUtils.toString(resource, "utf-8");
     }
 
@@ -59,7 +59,7 @@ public class ResourceLoader {
     }
 
     private static String getRawDataFromIssues(String dataTasksJson) throws IOException {
-        URL resource = ResourceLoader.class.getClassLoader().getResource(DATA_TASKS_JSON);
+        URL resource = ResourceLoader.class.getClassLoader().getResource(dataTasksJson);
         return IOUtils.toString(resource, "utf-8");
     }
 
